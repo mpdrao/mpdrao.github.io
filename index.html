@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedro (mpdrao) // Portfólio - Torre dos Titãs</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230f1422' stroke='%2338bdf8' stroke-width='6'/%3E%3Cpolygon points='25,32 75,32 75,44 57,44 57,75 43,75 43,44 25,44' fill='%23fbbf24' stroke='%23111827' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='48' fill='none' stroke='%23818cf8' stroke-dasharray='4,6' stroke-width='2' opacity='0.7'/%3E%3C/svg%3E">
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #07090f;
+      --bg-surface: #0e121d;
+      --bg-surface-alt: #131929;
+      --border-dark: #1e263d;
+      --border-glow: #2c385c;
+      --accent-titans-gold: #fbbf24;
+      --accent-robin-red: #ef4444;
+      --accent-raven-purple: #8b5cf6;
+      --accent-raven-deep: #4c1d95;
+      --accent-rain-cyan: #38bdf8;
+      --accent-rain-dim: #1e3a5f;
+      --text-main: #e2e8f0;
+      --text-muted: #8892b0;
+      --text-dim: #4f5b79;
+      --comic-shadow: 4px 4px 0px rgba(0, 0, 0, 0.85);
+      --comic-shadow-sm: 2px 2px 0px rgba(0, 0, 0, 0.9);
+      --comic-shadow-accent: 4px 4px 0px rgba(56, 189, 248, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* Melancholic Comic Halftone Dot Texture */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(7, 9, 15, 0.2) 0%, rgba(11, 15, 27, 0.95) 100%);
+      background-size: 18px 18px, 100% 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Canvas de Chuva e Neblina de Jump City */
+    #rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+
+    /* Container Global */
+    .app-wrapper {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem 1.5rem;
+    }
+
+    /* Estilo Angular dos Jovens Titãs (Corte Chanfrado) */
+    .titans-box {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-dark);
+      clip-path: polygon(
+        14px 0%, 
+        calc(100% - 14px) 0%, 
+        100% 14px, 
+        100% calc(100% - 14px), 
+        calc(100% - 14px) 100%, 
+        14px 100%, 
+        0% calc(100% - 14px), 
+        0% 14px
+      );
+      box-shadow: var(--comic-shadow);
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .titans-box:hover {
+      border-color: var(--border-glow);
+    }
+
+    .titans-corner-tag {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--border-dark);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-bottom-left-radius: 4px;
+    }
+
+    /* HEADER & NAV */
+    header {
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-dark);
+      margin-bottom: 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .communicator-badge {
+      width: 44px;
+      height: 44px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .communicator-badge:hover {
+      transform: scale(1.08);
+    }
+
+    .communicator-badge svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+    }
+
+    .brand-meta h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.75rem;
+      letter-spacing: 2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-meta h1 span {
+      color: var(--accent-titans-gold);
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .system-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-rain-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-rain-cyan);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-audio {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(14, 18, 29, 0.85);
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      padding: 0.5rem 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--comic-shadow-sm);
+    }
+
+    .btn-audio:hover, .btn-audio.active {
+      border-color: var(--accent-rain-cyan);
+      color: var(--accent-rain-cyan);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-rain-cyan);
+    }
+
+    /* HERO BANNER - SILHUETA DA TORRE E NOITE MELANCÓLICA */
+    .hero-section {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      padding: 2.2rem;
+      position: relative;
+      background: linear-gradient(135deg, rgba(14, 18, 29, 0.95) 0%, rgba(19, 25, 41, 0.85) 100%);
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent-raven-purple);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .eyebrow::before {
+      content: "//";
+      color: var(--accent-rain-cyan);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.8rem;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--accent-rain-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 1.25rem;
+    }
+
+    .comic-dialogue {
+      position: relative;
+      background: rgba(7, 9, 15, 0.85);
+      border-left: 3px solid var(--accent-raven-purple);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      border-radius: 0 4px 4px 0;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.5);
+    }
+
+    .comic-dialogue p {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .comic-dialogue .char-sign {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent-titans-gold);
+      margin-top: 0.4rem;
+      letter-spacing: 1px;
+      font-style: normal;
+    }
+
+    .tech-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background: rgba(30, 38, 61, 0.6);
+      border: 1px solid var(--border-dark);
+      padding: 0.3rem 0.75rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .tech-pill:hover {
+      border-color: var(--accent-rain-cyan);
+      transform: translateY(-2px);
+    }
+
+    .tech-pill.java { border-left: 3px solid #f97316; }
+    .tech-pill.spring { border-left: 3px solid #22c55e; }
+    .tech-pill.angular { border-left: 3px solid #ef4444; }
+    .tech-pill.react { border-left: 3px solid #06b6d4; }
+    .tech-pill.cpp { border-left: 3px solid #3b82f6; }
+    .tech-pill.python { border-left: 3px solid #eab308; }
+    .tech-pill.postgres { border-left: 3px solid #0284c7; }
+    .tech-pill.powershell { border-left: 3px solid #6366f1; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-titans {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1.5px;
+      padding: 0.6rem 1.6rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--comic-shadow);
+      text-transform: uppercase;
+    }
+
+    .btn-titans-primary {
+      background: var(--accent-titans-gold);
+      color: #07090f;
+      border-color: #d97706;
+    }
+
+    .btn-titans-primary:hover {
+      background: #f59e0b;
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-titans-secondary {
+      background: rgba(14, 18, 29, 0.9);
+      color: var(--accent-rain-cyan);
+      border-color: var(--border-dark);
+    }
+
+    .btn-titans-secondary:hover {
+      border-color: var(--accent-rain-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    /* CARD LATERAL - SILHUETA DA TORRE E MONITOR TÁTICO */
+    .hero-side-card {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: radial-gradient(circle at 50% 20%, rgba(30, 20, 50, 0.45) 0%, rgba(14, 18, 29, 0.95) 85%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tower-silhouette-container {
+      width: 100%;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .tower-silhouette-container svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9));
+    }
+
+    .monitor-specs {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background: rgba(7, 9, 15, 0.9);
+      border: 1px solid var(--border-dark);
+      padding: 0.9rem;
+      border-radius: 4px;
+    }
+
+    .spec-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    .spec-line span:last-child {
+      color: var(--accent-rain-cyan);
+      font-weight: 500;
+    }
+
+    .github-link-box {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .github-link-box a {
+      color: var(--accent-titans-gold);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .github-link-box a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* SEÇÃO COMUM COM TÍTULOS DE HISTÓRIA EM QUADRINHOS */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    .section-title span.tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent-titans-gold);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 2px 8px;
+      vertical-align: middle;
+    }
+
+    .section-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* FILTROS DE PROJETOS */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dark);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--comic-shadow-sm);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent-raven-deep);
+      border-color: var(--accent-raven-purple);
+      color: #fff;
+    }
+
+    /* GRID DE PROJETOS / MISSÕES */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 4rem;
+    }
+
+    .project-card {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(10, 14, 24, 0.98) 100%);
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.95), 0 0 16px rgba(56, 189, 248, 0.1);
+      border-color: var(--border-glow);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-rain-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .project-badge.purple {
+      background: rgba(139, 92, 246, 0.12);
+      border-color: rgba(139, 92, 246, 0.4);
+      color: var(--accent-raven-purple);
+    }
+
+    .project-badge.amber {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: var(--accent-titans-gold);
+    }
+
+    .project-badge.red {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: var(--accent-robin-red);
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.85rem;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .project-techs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tech-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .project-repo-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-titans-gold);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .project-repo-link:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .repo-stats {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ARSENAL TÁTICO / HABILIDADES */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .skill-card {
+      padding: 1.5rem;
+      background: var(--bg-surface);
+      border-left: 3px solid var(--accent-rain-cyan);
+    }
+
+    .skill-card.purple {
+      border-left-color: var(--accent-raven-purple);
+    }
+
+    .skill-card.gold {
+      border-left-color: var(--accent-titans-gold);
+    }
+
+    .skill-card.red {
+      border-left-color: var(--accent-robin-red);
+    }
+
+    .skill-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-item:last-child {
+      border-bottom: none;
+    }
+
+    .skill-item::before {
+      content: "▸";
+      color: var(--accent-rain-cyan);
+    }
+
+    .skill-card.purple .skill-item::before { color: var(--accent-raven-purple); }
+    .skill-card.gold .skill-item::before { color: var(--accent-titans-gold); }
+    .skill-card.red .skill-item::before { color: var(--accent-robin-red); }
+
+    /* TERMINAL DA TORRE (INTERATIVO) */
+    .terminal-section {
+      margin-bottom: 4rem;
+    }
+
+    .terminal-box {
+      background: #05070c;
+      border: 2px solid var(--border-dark);
+      box-shadow: var(--comic-shadow);
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      background: #111726;
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .terminal-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .term-btn {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .term-btn.red { background: #ef4444; }
+    .term-btn.yellow { background: #f59e0b; }
+    .term-btn.green { background: #10b981; }
+
+    .terminal-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .terminal-content {
+      padding: 1.25rem;
+      min-height: 180px;
+      max-height: 280px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .term-output-line {
+      margin-bottom: 0.35rem;
+    }
+
+    .term-prompt-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1.25rem 1rem 1.25rem;
+      background: #05070c;
+    }
+
+    .term-prompt {
+      color: var(--accent-titans-gold);
+      font-weight: 700;
+    }
+
+    .term-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-rain-cyan);
+      flex-grow: 1;
+    }
+
+    /* TRANSMISSÃO & CONTATO */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-card {
+      padding: 2rem;
+      background: var(--bg-surface);
+    }
+
+    .contact-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .contact-link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: rgba(19, 25, 41, 0.6);
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border-dark);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .contact-link-row:hover {
+      border-color: var(--accent-rain-cyan);
+      transform: translateX(4px);
+    }
+
+    .contact-link-row svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-titans-gold);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 2px solid var(--border-dark);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: var(--accent-rain-cyan);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* MODAL DO COMUNICADOR DOS TITÃS */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(3, 5, 9, 0.88);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .communicator-modal {
+      width: 100%;
+      max-width: 440px;
+      background: #0b0f19;
+      border: 3px solid var(--accent-titans-gold);
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.3), var(--comic-shadow);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 860px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.8rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas Dinâmico de Chuva Melancólica de Jump City -->
+  <canvas id="rain-canvas"></canvas>
+
+  <div class="app-wrapper">
+
+    <!-- HEADER / BARRA DE NAVEGAÇÃO -->
+    <header>
+      <a href="#" class="brand">
+        <div class="communicator-badge" id="open-communicator" title="Abrir Comunicador dos Titãs">
+          <!-- Ícone do Comunicador Clássico com T Amarelo -->
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="#0c111e" stroke="#38bdf8" stroke-width="5"/>
+            <circle cx="50" cy="50" r="38" fill="#13192a" stroke="#1e293b" stroke-width="2"/>
+            <polygon points="26,30 74,30 74,42 56,42 56,76 44,76 44,42 26,42" fill="#fbbf24" stroke="#000" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="48" fill="none" stroke="#818cf8" stroke-dasharray="3,6" stroke-width="1.5" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <h1>MPDRAO <span>// JUMP_CITY.SYS</span></h1>
+          <div class="system-status">
+            <span class="pulse-dot"></span>
+            <span>TRANSMISSÃO DA TORRE ATIVA</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="nav-controls">
+        <button id="toggle-audio-btn" class="btn-audio" title="Ativar/Desativar som ambiente de chuva e estática">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <span id="audio-label">CHUVA: OFF</span>
+        </button>
+        <a href="#projetos" class="nav-link">/MISSÕES</a>
+        <a href="#arsenal" class="nav-link">/ARSENAL</a>
+        <a href="#contato" class="nav-link">/CONTATO</a>
+      </div>
+    </header>
+
+    <!-- HERO SECTION: JUMP CITY NIGHT SKY & TORRE DOS TITÃS -->
+    <section class="hero-section">
+      <div class="titans-box hero-main">
+        <span class="titans-corner-tag">RELATÓRIO // SECTOR 07</span>
+        
+        <div class="eyebrow">FREQUÊNCIA TITÃ 104.7 MHZ • DEV LOG</div>
+        <h2 class="hero-title">PEDRO (MPDRAO)</h2>
+        <div class="hero-subtitle">DESENVOLVEDOR FULL STACK & SISTEMAS RESILIENTES</div>
+
+        <div class="comic-dialogue">
+          <p>"A chuva não cessa em Jump City. Na calada da noite, enquanto a cidade dorme sob a névoa, linhas de código em Java, C++ e TypeScript são forjadas para resistir a qualquer falha."</p>
+          <span class="char-sign">— Registro Noturno da Torre</span>
+        </div>
+
+        <div class="tech-badges-row">
+          <div class="tech-pill java">☕ Java</div>
+          <div class="tech-pill spring">🍃 Spring Boot</div>
+          <div class="tech-pill angular">🅰️ Angular</div>
+          <div class="tech-pill react">⚛️ React & Next.js</div>
+          <div class="tech-pill cpp">⚡ C++</div>
+          <div class="tech-pill python">🐍 Python</div>
+          <div class="tech-pill postgres">🐘 PostgreSQL</div>
+          <div class="tech-pill powershell">💻 PowerShell & DevOps</div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projetos" class="btn-titans btn-titans-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Explorar Repositórios
+          </a>
+          <a href="https://github.com/mpdrao" target="_blank" rel="noopener noreferrer" class="btn-titans btn-titans-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub @mpdrao
+          </a>
+        </div>
+      </div>
+
+      <!-- PAINEL LATERAL: SILHUETA DA TORRE E MONITOR -->
+      <div class="titans-box hero-side-card">
+        <span class="titans-corner-tag">MONITOR TÁTICO</span>
+        
+        <div class="tower-silhouette-container">
+          <!-- Silhueta SVG da icônica Torre dos Titãs em forma de T com nuvens melancólicas e lua sombria -->
+          <svg viewBox="0 0 200 160" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#090d18" />
+                <stop offset="100%" stop-color="#19233c" />
+              </linearGradient>
+              <linearGradient id="towerGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#05070d" />
+                <stop offset="100%" stop-color="#0a0f1d" />
+              </linearGradient>
+            </defs>
+            <!-- Fundo céus noturnos -->
+            <rect width="200" height="160" fill="url(#skyGrad)" rx="4"/>
+            <!-- Lua distante entre as nuvens -->
+            <circle cx="150" cy="40" r="18" fill="#38bdf8" opacity="0.15" filter="blur(6px)"/>
+            <circle cx="150" cy="40" r="14" fill="#e2e8f0" opacity="0.45"/>
+            <!-- Ilha isolada -->
+            <path d="M20 155 Q 100 135 180 155 L200 160 L0 160 Z" fill="#04060a" />
+            <!-- Silhueta Gigante da Torre em T (Glen Murakami Style) -->
+            <!-- Base da torre -->
+            <polygon points="85,150 115,150 112,85 88,85" fill="url(#towerGrad)" stroke="#1e293b" stroke-width="1.5"/>
+            <!-- Topo horizontal do T da Torre -->
+            <polygon points="50,85 150,85 155,55 45,55" fill="url(#towerGrad)" stroke="#1e293b" stroke-width="1.5"/>
+            <!-- Janelas da sala de comando dos Titãs (brilho ciano noturno suave) -->
+            <polygon points="58,80 142,80 146,65 54,65" fill="#38bdf8" opacity="0.35"/>
+            <polygon points="70,76 130,76 133,68 67,68" fill="#e0f2fe" opacity="0.55"/>
+            <!-- Reflexo d'água sob a chuva -->
+            <line x1="30" y1="156" x2="70" y2="156" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+            <line x1="90" y1="158" x2="140" y2="158" stroke="#38bdf8" stroke-width="1" opacity="0.2"/>
+          </svg>
+        </div>
+
+        <div class="monitor-specs">
+          <div class="spec-line">
+            <span>OPERADOR:</span>
+            <span>Pedro // mpdrao</span>
+          </div>
+          <div class="spec-line">
+            <span>BASE:</span>
+            <span>Jump City / Brasil</span>
+          </div>
+          <div class="spec-line">
+            <span>REPOSITÓRIOS:</span>
+            <span id="repo-count-badge">10+ Projetos</span>
+          </div>
+          <div class="spec-line">
+            <span>STACK FOCO:</span>
+            <span>Java • Angular • C++</span>
+          </div>
+          <div class="spec-line">
+            <span>PROTOCOLO:</span>
+            <span>Clean Architecture</span>
+          </div>
+        </div>
+
+        <div class="github-link-box">
+          <a href="https://github.com/mpdrao" target="_blank" rel="noopener noreferrer">
+            <span>⚡ Abrir Perfil GitHub Completo ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO: MISSÕES / REPOSITÓRIOS -->
+    <section id="projetos">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">MISSÕES & REPOSITÓRIOS <span class="tag">TOP SELECTION</span></h2>
+          <p class="section-desc">Projetos públicos extraídos diretamente dos registros de @mpdrao</p>
+        </div>
+      </div>
+
+      <!-- Filtros de Projetos -->
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">Todas as Missões</button>
+        <button class="filter-btn" data-filter="backend">Backend & Java</button>
+        <button class="filter-btn" data-filter="frontend">Frontend & Full Stack</button>
+        <button class="filter-btn" data-filter="systems">Sistemas & Cyber</button>
+        <button class="filter-btn" data-filter="automation">Automação & Agentes</button>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- 1. COTAI -->
+        <div class="titans-box project-card" data-category="backend frontend">
+          <div>
+            <div class="project-header">
+              <span class="project-badge amber">Destaque Full Stack</span>
+              <span class="repo-stats">★ Java / Angular</span>
+            </div>
+            <h3 class="project-title">COTAI</h3>
+            <p class="project-desc">
+              Plataforma para listas de presentes e arrecadação coletiva em cotas para qualquer tipo de evento (casamentos, aniversários e recepções). Integra backend robusto com experiência fluida de usuário.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">Java</span>
+              <span class="project-tech-tag">Spring Boot</span>
+              <span class="project-tech-tag">Angular</span>
+              <span class="project-tech-tag">REST API</span>
+              <span class="project-tech-tag">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/cotai" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/cotai ↗</span>
+            </a>
+            <span class="repo-stats">v1.0</span>
+          </div>
+        </div>
+
+        <!-- 2. SOFTWARE ENGINEERING AGENT -->
+        <div class="titans-box project-card" data-category="automation systems">
+          <div>
+            <div class="project-header">
+              <span class="project-badge purple">Protocolo de IA</span>
+              <span class="repo-stats">★ PowerShell</span>
+            </div>
+            <h3 class="project-title">SOFTWARE ENGINEERING AGENT</h3>
+            <p class="project-desc">
+              Conjunto de automações inteligentes e infraestrutura de agente para fluxos de engenharia de software, orquestração de rotinas e aceleração de desenvolvimento.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">PowerShell</span>
+              <span class="project-tech-tag">AI Automation</span>
+              <span class="project-tech-tag">Workflow Scripts</span>
+              <span class="project-tech-tag">DevOps</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/software-engineering-agent" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/software-engineering-agent ↗</span>
+            </a>
+            <span class="repo-stats">★ 1</span>
+          </div>
+        </div>
+
+        <!-- 3. PRINTAI & PRINTAI-DEV -->
+        <div class="titans-box project-card" data-category="backend">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Arquitetura de Dados</span>
+              <span class="repo-stats">★ Java</span>
+            </div>
+            <h3 class="project-title">PRINTAI & PRINTAI-DEV</h3>
+            <p class="project-desc">
+              Ecossistema de processamento e gerenciamento em desenvolvimento (PRINTAI-DEV) focado em soluções de impressão e gestão documental de alta disponibilidade.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">Java</span>
+              <span class="project-tech-tag">Spring Framework</span>
+              <span class="project-tech-tag">Microservices</span>
+              <span class="project-tech-tag">Clean Code</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/PRINTAI-DEV" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/PRINTAI-DEV ↗</span>
+            </a>
+            <span class="repo-stats">Active Dev</span>
+          </div>
+        </div>
+
+        <!-- 4. SHOPS-API -->
+        <div class="titans-box project-card" data-category="backend">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">E-Commerce Core</span>
+              <span class="repo-stats">★ Java</span>
+            </div>
+            <h3 class="project-title">SHOPS-API</h3>
+            <p class="project-desc">
+              API RESTful desenhada para comércio e catálogo de produtos, estruturada com separação de camadas, DTOs, controllers concisos e persistência com Spring Data JPA.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">Java</span>
+              <span class="project-tech-tag">Spring Boot</span>
+              <span class="project-tech-tag">Hibernate / JPA</span>
+              <span class="project-tech-tag">SQL</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/shops-api" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/shops-api ↗</span>
+            </a>
+            <span class="repo-stats">REST Service</span>
+          </div>
+        </div>
+
+        <!-- 5. FOODBASE -->
+        <div class="titans-box project-card" data-category="systems">
+          <div>
+            <div class="project-header">
+              <span class="project-badge red">Sistemas de Baixo Nível</span>
+              <span class="repo-stats">★ C++</span>
+            </div>
+            <h3 class="project-title">FOODBASE</h3>
+            <p class="project-desc">
+              Projeto de alta eficiência explorando a integração de baixo nível entre C++ e banco de dados PostgreSQL relacional, com foco em gerenciamento de conexões e performance de queries.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">C++</span>
+              <span class="project-tech-tag">PostgreSQL</span>
+              <span class="project-tech-tag">Libpq</span>
+              <span class="project-tech-tag">Performance</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/foodbase" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/foodbase ↗</span>
+            </a>
+            <span class="repo-stats">Low-level DB</span>
+          </div>
+        </div>
+
+        <!-- 6. REACT-NEXT -->
+        <div class="titans-box project-card" data-category="frontend">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Modern Web</span>
+              <span class="repo-stats">★ TypeScript</span>
+            </div>
+            <h3 class="project-title">REACT-NEXT</h3>
+            <p class="project-desc">
+              Base moderna com Next.js, React e TypeScript desenvolvida para interfaces rápidas, SSR / SSG e boas práticas de componentização e estado imutável.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">TypeScript</span>
+              <span class="project-tech-tag">React</span>
+              <span class="project-tech-tag">Next.js</span>
+              <span class="project-tech-tag">Frontend Moderno</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/react-next" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/react-next ↗</span>
+            </a>
+            <span class="repo-stats">App Router</span>
+          </div>
+        </div>
+
+        <!-- 7. RANS-DIO & CYBER-DIO -->
+        <div class="titans-box project-card" data-category="systems">
+          <div>
+            <div class="project-header">
+              <span class="project-badge red">Cyber Lab</span>
+              <span class="repo-stats">★ Python</span>
+            </div>
+            <h3 class="project-title">RANS-DIO & CYBER-DIO</h3>
+            <p class="project-desc">
+              Laboratório educacional de segurança defensiva e ofensiva. Implementa rotinas de criptografia simétrica/assimétrica e conscientização contra ameaças cibernéticas.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">Python</span>
+              <span class="project-tech-tag">Criptografia</span>
+              <span class="project-tech-tag">Cybersecurity</span>
+              <span class="project-tech-tag">Pesquisa</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/rans-dio" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/rans-dio ↗</span>
+            </a>
+            <span class="repo-stats">Edu Lab</span>
+          </div>
+        </div>
+
+        <!-- 8. XABLAVSKK -->
+        <div class="titans-box project-card" data-category="automation">
+          <div>
+            <div class="project-header">
+              <span class="project-badge purple">Identidade Hacker</span>
+              <span class="repo-stats">★ Profile</span>
+            </div>
+            <h3 class="project-title">XABLAVSKK</h3>
+            <p class="project-desc">
+              O quartel-general de experimentos de Pedro (@mpdrao). Um ponto de convergência para testes de ferramentas, scripts rápidos e ideias experimentais.
+            </p>
+            <div class="project-techs">
+              <span class="project-tech-tag">Manifesto</span>
+              <span class="project-tech-tag">Config</span>
+              <span class="project-tech-tag">Hacking Lab</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/mpdrao/xablavskk" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+              <span>github.com/mpdrao/xablavskk ↗</span>
+            </a>
+            <span class="repo-stats">Lab</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARSENAL TÁTICO / SKILLS -->
+    <section id="arsenal">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">ARSENAL TÁTICO <span class="tag">HABILIDADES</span></h2>
+          <p class="section-desc">Tecnologias dominadas nas noites de vigília e desenvolvimento</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Card 1: Backend -->
+        <div class="titans-box skill-card">
+          <h3 class="skill-title">BACKEND & CORE</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Java (17 / 21+) Moderno</li>
+            <li class="skill-item">Spring Boot & Spring Data JPA</li>
+            <li class="skill-item">APIs RESTful & Autenticação JWT</li>
+            <li class="skill-item">PostgreSQL & Modelagem Relacional</li>
+            <li class="skill-item">C++ & Gerenciamento de Memória</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Frontend -->
+        <div class="titans-box skill-card purple">
+          <h3 class="skill-title">INTERFACES & FRONTEND</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Angular & TypeScript</li>
+            <li class="skill-item">React & Ecossistema Next.js</li>
+            <li class="skill-item">HTML5, CSS3 Semântico & Tailwind</li>
+            <li class="skill-item">Componentização Reutilizável</li>
+            <li class="skill-item">Design Responsivo & Dark Mode</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Automação -->
+        <div class="titans-box skill-card gold">
+          <h3 class="skill-title">AUTOMAÇÃO & DEVOPS</h3>
+          <ul class="skill-list">
+            <li class="skill-item">PowerShell Scripting Avançado</li>
+            <li class="skill-item">Git, GitHub & GitHub CLI (gh)</li>
+            <li class="skill-item">AI Agents & Workflow Engineering</li>
+            <li class="skill-item">CI/CD & GitHub Actions</li>
+            <li class="skill-item">Ambientes Windows & Linux</li>
+          </ul>
+        </div>
+
+        <!-- Card 4: Métodos -->
+        <div class="titans-box skill-card red">
+          <h3 class="skill-title">ENGENHARIA & QUALIDADE</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Princípios SOLID & Clean Code</li>
+            <li class="skill-item">Design Patterns Estruturais</li>
+            <li class="skill-item">Segurança Defensiva & OWASP</li>
+            <li class="skill-item">Refatoração Segura & Resiliência</li>
+            <li class="skill-item">Arquitetura de Microsserviços</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERMINAL INTERATIVO DA TORRE DOS TITÃS -->
+    <section class="terminal-section">
+      <div class="terminal-box">
+        <div class="terminal-bar">
+          <div class="terminal-buttons">
+            <div class="term-btn red"></div>
+            <div class="term-btn yellow"></div>
+            <div class="term-btn green"></div>
+          </div>
+          <div class="terminal-title">MAINFRAME // TORRE DOS TITÃS - TERMINAL v2.04</div>
+          <div style="font-size: 0.7rem; color: #475569;">BASH // JUMP_CITY</div>
+        </div>
+
+        <div class="terminal-content" id="terminal-screen">
+          <div class="term-output-line" style="color: #64748b;">[TORRE_NET] Conexão segura estabelecida com o servidor de Jump City...</div>
+          <div class="term-output-line" style="color: #38bdf8;">Bem-vindo ao terminal de @mpdrao. Digite <strong style="color: #fbbf24;">help</strong> para listar os comandos disponíveis.</div>
+        </div>
+
+        <div class="term-prompt-row">
+          <span class="term-prompt">mpdrao@torre:~$</span>
+          <input type="text" id="terminal-input" class="term-input" placeholder="digite um comando (ex: help, projects, skills, azarath, clear)..." autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSMISSÃO / CONTATO -->
+    <section id="contato">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">TRANSMISSÃO DE CONTATO <span class="tag">FREQUÊNCIA DIRETA</span></h2>
+          <p class="section-desc">Abra um canal de comunicação com a base</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="titans-box contact-card">
+          <span class="titans-corner-tag">CANAL OFICIAL</span>
+          <h3>CONTATO & COLABORAÇÃO</h3>
+          <p>
+            Interessado em desenvolver um sistema de alta performance, discutir arquitetura de microsserviços em Spring Boot ou integrar novos recursos full stack? Envie um sinal para a torre.
+          </p>
+
+          <div class="contact-methods">
+            <a href="https://github.com/mpdrao" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span>GitHub: @mpdrao</span>
+            </a>
+
+            <div class="contact-link-row" id="copy-discord">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+              <span id="discord-text">Identificador: xablavskk / mpdrao</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Citação Melancólica de Robin / Ravena -->
+        <div class="titans-box contact-card" style="border-left: 3px solid var(--accent-raven-purple);">
+          <span class="titans-corner-tag">REGISTRO FINAL</span>
+          <h3 style="color: var(--accent-raven-purple);">"AZARATH METRION ZINTHOS"</h3>
+          <p style="font-style: italic; color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+            "A escuridão não é um vazio; é o espaço onde a concentração se aprofunda e as soluções mais difíceis tomam forma. A Torre dos Titãs resiste a cada onda porque foi construída com propósito."
+          </p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-titans-gold); margin-top: 1rem;">
+            COORDENADAS: JUMP CITY BAY • 37.8° N, 122.4° W
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>PORTFÓLIO PEDRO (@MPDRAO) • INSPIRADO NA ESTÉTICA CLÁSSICA DE JOVENS TITÃS (2003)</div>
+      <div>Jump City Central Network // Todos os códigos e missões hospedados no GitHub</div>
+    </footer>
+
+  </div>
+
+  <!-- MODAL DO COMUNICADOR DOS TITÃS -->
+  <div class="modal-overlay" id="communicator-modal-overlay">
+    <div class="communicator-modal titans-box">
+      <button class="modal-close-btn" id="close-communicator">&times;</button>
+      
+      <div style="width: 80px; height: 80px; margin: 0 auto 1.25rem auto;">
+        <svg viewBox="0 0 100 100" style="filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.6));">
+          <circle cx="50" cy="50" r="46" fill="#0f1422" stroke="#38bdf8" stroke-width="5"/>
+          <circle cx="50" cy="50" r="38" fill="#182035" stroke="#1e293b" stroke-width="2"/>
+          <polygon points="26,30 74,30 74,42 56,42 56,76 44,76 44,42 26,42" fill="#fbbf24" stroke="#000" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--accent-titans-gold); letter-spacing: 2px;">
+        COMUNICADOR DOS TITÃS
+      </h3>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        CHAMADA DE TRANSMISSÃO DIRETA // STATUS: SINAL ESTÁVEL
+      </p>
+
+      <div style="background: rgba(7, 9, 15, 0.95); border: 1px solid var(--border-dark); padding: 1rem; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.5;">
+        <span style="color: var(--accent-rain-cyan);">[ROBIN]:</span> "Aqui é a Torre. Relatório recebido com sucesso de Pedro (@mpdrao). Todos os 10 repositórios foram inspecionados. Os serviços em Java e C++ permanecem operacionais."
+      </div>
+
+      <a href="https://github.com/mpdrao" target="_blank" rel="noopener noreferrer" class="btn-titans btn-titans-primary" style="width: 100%; justify-content: center;">
+        Acessar Perfil no GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- SCRIPTS: CHUVA EM CANVAS, ÁUDIO AMBIENTE SINTETIZADO E TERMINAL INTERATIVO -->
+  <script>
+    // 1. ANIMAÇÃO DE CHUVA MELANCÓLICA NO CANVAS
+    const canvas = document.getElementById('rain-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const dropCount = 140;
+    const drops = [];
+
+    for (let i = 0; i < dropCount; i++) {
+      drops.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        length: Math.random() * 18 + 10,
+        speed: Math.random() * 6 + 7,
+        opacity: Math.random() * 0.25 + 0.1
+      });
+    }
+
+    function animateRain() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < dropCount; i++) {
+        const d = drops[i];
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 2, d.y + d.length);
+        ctx.strokeStyle = `rgba(56, 189, 248, ${d.opacity})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        d.y += d.speed;
+        d.x -= 0.6; // ligeiro vento melancólico
+
+        if (d.y > height) {
+          d.y = -20;
+          d.x = Math.random() * width;
+        }
+        if (d.x < 0) {
+          d.x = width;
+        }
+      }
+
+      requestAnimationFrame(animateRain);
+    }
+    animateRain();
+
+    // 2. SINTETIZADOR DE ÁUDIO MELANCÓLICO DE CHUVA (Web Audio API)
+    // Sem arquivos externos: gera ruído rosa filtrado simulando chuva suave contínua
+    let audioCtx = null;
+    let isPlayingAudio = false;
+    let noiseNode = null;
+    let filterNode = null;
+    let gainNode = null;
+
+    const toggleAudioBtn = document.getElementById('toggle-audio-btn');
+    const audioLabel = document.getElementById('audio-label');
+
+    function createRainAudio() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+
+      // Algoritmo de ruído rosa suave para simulação natural de chuva
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+        output[i] *= 0.04; // volume moderado e calmo
+        b6 = white * 0.115926;
+      }
+
+      noiseNode = audioCtx.createBufferSource();
+      noiseNode.buffer = noiseBuffer;
+      noiseNode.loop = true;
+
+      // Filtro passa-baixa simulando a acústica de chuva de Jump City
+      filterNode = audioCtx.createBiquadFilter();
+      filterNode.type = 'lowpass';
+      filterNode.frequency.setValueAtTime(800, audioCtx.currentTime);
+
+      gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+      noiseNode.connect(filterNode);
+      filterNode.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      noiseNode.start();
+    }
+
+    toggleAudioBtn.addEventListener('click', () => {
+      if (!audioCtx) {
+        createRainAudio();
+        isPlayingAudio = true;
+        toggleAudioBtn.classList.add('active');
+        audioLabel.textContent = 'CHUVA: ON';
+      } else if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+        isPlayingAudio = true;
+        toggleAudioBtn.classList.add('active');
+        audioLabel.textContent = 'CHUVA: ON';
+      } else if (audioCtx.state === 'running') {
+        audioCtx.suspend();
+        isPlayingAudio = false;
+        toggleAudioBtn.classList.remove('active');
+        audioLabel.textContent = 'CHUVA: OFF';
+      }
+    });
+
+    // 3. FILTRO DE PROJETOS POR CATEGORIA
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'flex';
+          } else {
+            const categories = card.dataset.category.split(' ');
+            if (categories.includes(filter)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+
+    // 4. TERMINAL INTERATIVO DA TORRE
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalScreen = document.getElementById('terminal-screen');
+
+    const commands = {
+      'help': 'Comandos disponíveis: help, projects, skills, about, contact, azarath, titans, clear, date',
+      'about': 'Pedro (@mpdrao) - Desenvolvedor Full Stack especializado em Java (Spring Boot), Angular, C++, TypeScript e soluções em nuvem.',
+      'projects': 'Repositórios principais: cotai, software-engineering-agent, PRINTAI-DEV, shops-api, foodbase, react-next, rans-dio.',
+      'skills': 'Arsenal: Java 21, Spring Boot, Angular, React, Next.js, C++, Python, PostgreSQL, PowerShell, Docker, Git.',
+      'contact': 'GitHub: https://github.com/mpdrao | Local: Jump City Central Network',
+      'azarath': '🔮 Azarath Metrion Zinthos... Os corvos de Ravena guardam o portal.',
+      'titans': '⚡ TITÃS, ATACAR! Frequência do comunicado sintonizada.',
+      'date': new Date().toLocaleString('pt-BR') + ' // Noite chuvosa em Jump City',
+      'clear': 'CLEAR_COMMAND'
+    };
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const rawCmd = terminalInput.value.trim();
+        const cmd = rawCmd.toLowerCase();
+        
+        if (!cmd) return;
+
+        // Print comando digitado
+        const promptEcho = document.createElement('div');
+        promptEcho.className = 'term-output-line';
+        promptEcho.innerHTML = `<span style="color: var(--accent-titans-gold);">mpdrao@torre:~$</span> ${rawCmd}`;
+        terminalScreen.appendChild(promptEcho);
+
+        if (cmd === 'clear') {
+          terminalScreen.innerHTML = '';
+        } else if (commands[cmd]) {
+          const resp = document.createElement('div');
+          resp.className = 'term-output-line';
+          resp.style.color = '#38bdf8';
+          resp.textContent = commands[cmd];
+          terminalScreen.appendChild(resp);
+        } else {
+          const err = document.createElement('div');
+          err.className = 'term-output-line';
+          err.style.color = '#ef4444';
+          err.textContent = `Comando '${rawCmd}' não reconhecido pelo Mainframe. Digite 'help'.`;
+          terminalScreen.appendChild(err);
+        }
+
+        terminalInput.value = '';
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+      }
+    });
+
+    // 5. MODAL DO COMUNICADOR
+    const openCommBtn = document.getElementById('open-communicator');
+    const commModal = document.getElementById('communicator-modal-overlay');
+    const closeCommBtn = document.getElementById('close-communicator');
+
+    openCommBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      commModal.classList.add('active');
+    });
+
+    closeCommBtn.addEventListener('click', () => {
+      commModal.classList.remove('active');
+    });
+
+    commModal.addEventListener('click', (e) => {
+      if (e.target === commModal) {
+        commModal.classList.remove('active');
+      }
+    });
+
+    // 6. COPIAR IDENTIFICADOR
+    const copyDiscordBtn = document.getElementById('copy-discord');
+    const discordText = document.getElementById('discord-text');
+
+    copyDiscordBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('mpdrao').then(() => {
+        const original = discordText.textContent;
+        discordText.textContent = 'Copiado para a área de transferência!';
+        discordText.style.color = '#38bdf8';
+        setTimeout(() => {
+          discordText.textContent = original;
+          discordText.style.color = '';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
