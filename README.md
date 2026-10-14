@@ -1,4 +1,4 @@
-# Portfolio de Pedro (@mpdrao) // Torre dos Titas
+# Portfolio de Mario Pedrao (@mpdrao) // Torre dos Titas
 
 Portfolio pessoal e catalogo de projetos de software desenvolvido com estetica nostalgica e melancolica inspirada no universo classico da serie animada Jovens Titas (Teen Titans - 2003).
 
@@ -8,11 +8,11 @@ Acesse online: [https://mpdrao.github.io](https://mpdrao.github.io)
 
 ## Conceito Visual e Estetica
 
-- Estilo Grafico: Inspirado na direcao de arte classica de Glen Murakami para Jovens Titas (2003) - cortes angulares nos cartoes (chanfrados), sombras com alto contraste de historias em quadrinhos, estetica cyberpunk sombria de Jump City.
-- Clima Melancolico: Chuva contabilizada via Canvas 2D, paleta de cores noturna (azul-noite, ardosia, violeta da Ravena e dourado/ciano dos comunicadores dos Titas).
+- Estilo Grafico: Inspirado na direcao de arte classica de Glen Murakami para Jovens Titas (2003) - cortes angulares nos cartoes (chanfrados), sombras com alto contraste de historias em quadrinhos e estetica noturna sombria.
+- Clima Melancolico: Chuva contínua renderizada via Canvas 2D, paleta de cores noturna (azul-noite, ardosia, violeta e dourado/ciano dos sistemas da Torre).
 - Gerador de Audio Procedural: Gerador sintetizado de chuva e ruido via Web Audio API nativa (sem necessidade de arquivos de audio externos, acionavel pelo botao de chuva).
-- Terminal Interativo: Console estilo mainframe da Torre dos Titas que responde a comandos como help, projects, skills, azarath, titans, entre outros.
-- Comunicador dos Titas: Widget interativo que replica o classico comunicador com a insignia amarela em T.
+- Terminal Interativo: Console estilo mainframe da Torre dos Titas que responde a comandos como help, projects, skills, titans, clear, date, entre outros.
+- Comunicador da Torre: Widget interativo com emblema geometrico MP e status de transmissao.
 
 ---
 
@@ -37,4 +37,4 @@ Acesse online: [https://mpdrao.github.io](https://mpdrao.github.io)
 
 ---
 
-Base de operacoes: Jump City // Desenvolvido por [Pedro (@mpdrao)](https://github.com/mpdrao)
+Base de operacoes: Torre dos Titas // Desenvolvido por [Mario Pedrao (@mpdrao)](https://github.com/mpdrao)

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedro (mpdrao) // Portfólio - Torre dos Titãs</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230f1422' stroke='%2338bdf8' stroke-width='6'/%3E%3Cpolygon points='25,32 75,32 75,44 57,44 57,75 43,75 43,44 25,44' fill='%23fbbf24' stroke='%23111827' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='48' fill='none' stroke='%23818cf8' stroke-dasharray='4,6' stroke-width='2' opacity='0.7'/%3E%3C/svg%3E">
+  <title>Mario Pedrao (mpdrao) // Portfólio - Torre dos Titãs</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,4 94,24 94,76 50,96 6,76 6,24' fill='%23080c16' stroke='%2338bdf8' stroke-width='6'/%3E%3Cpolygon points='50,14 84,30 84,70 50,86 16,70 16,30' fill='%23101726' stroke='%23fbbf24' stroke-width='2'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-size='38' font-weight='bold' text-anchor='middle' fill='%23fbbf24'%3EMP%3C/text%3E%3C/svg%3E">
   
   <!-- Fontes do Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +68,7 @@
       z-index: 1;
     }
 
-    /* Canvas de Chuva e Neblina de Jump City */
+    /* Canvas de Chuva e Neblina Noturna */
     #rain-canvas {
       position: fixed;
       top: 0;
@@ -952,7 +952,7 @@
 </head>
 <body>
 
-  <!-- Canvas Dinâmico de Chuva Melancólica de Jump City -->
+  <!-- Canvas Dinâmico de Chuva Melancólica -->
   <canvas id="rain-canvas"></canvas>
 
   <div class="app-wrapper">
@@ -960,17 +960,25 @@
     <!-- HEADER / BARRA DE NAVEGAÇÃO -->
     <header>
       <a href="#" class="brand">
-        <div class="communicator-badge" id="open-communicator" title="Abrir Comunicador dos Titãs">
-          <!-- Ícone do Comunicador Clássico com T Amarelo -->
+        <div class="communicator-badge" id="open-communicator" title="Abrir Comunicador da Torre">
+          <!-- Novo Emblema Angular MP -->
           <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="46" fill="#0c111e" stroke="#38bdf8" stroke-width="5"/>
-            <circle cx="50" cy="50" r="38" fill="#13192a" stroke="#1e293b" stroke-width="2"/>
-            <polygon points="26,30 74,30 74,42 56,42 56,76 44,76 44,42 26,42" fill="#fbbf24" stroke="#000" stroke-width="2.5"/>
-            <circle cx="50" cy="50" r="48" fill="none" stroke="#818cf8" stroke-dasharray="3,6" stroke-width="1.5" opacity="0.6"/>
+            <defs>
+              <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#141c2e"/>
+                <stop offset="100%" stop-color="#080c16"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,4 94,24 94,76 50,96 6,76 6,24" fill="url(#shieldGrad)" stroke="#38bdf8" stroke-width="3.5"/>
+            <polygon points="50,12 86,28 86,72 50,88 14,72 14,28" fill="#060911" stroke="#1e293b" stroke-width="1.5"/>
+            <polygon points="50,20 78,34 78,66 50,80 22,66 22,34" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+            <text x="50" y="64" font-family="'Bebas Neue', sans-serif" font-size="38" font-weight="bold" text-anchor="middle" fill="#fbbf24" stroke="#000" stroke-width="1.5" letter-spacing="2">MP</text>
+            <circle cx="50" cy="8" r="2.5" fill="#38bdf8"/>
+            <circle cx="50" cy="92" r="2.5" fill="#38bdf8"/>
           </svg>
         </div>
         <div class="brand-meta">
-          <h1>MPDRAO <span>// JUMP_CITY.SYS</span></h1>
+          <h1>MPDRAO <span>// TORRE_NET.SYS</span></h1>
           <div class="system-status">
             <span class="pulse-dot"></span>
             <span>TRANSMISSÃO DA TORRE ATIVA</span>
@@ -992,17 +1000,17 @@
       </div>
     </header>
 
-    <!-- HERO SECTION: JUMP CITY NIGHT SKY & TORRE DOS TITÃS -->
+    <!-- HERO SECTION: CÉU NOTURNO & TORRE DOS TITÃS -->
     <section class="hero-section">
       <div class="titans-box hero-main">
         <span class="titans-corner-tag">RELATÓRIO // SECTOR 07</span>
         
         <div class="eyebrow">FREQUÊNCIA TITÃ 104.7 MHZ • DEV LOG</div>
-        <h2 class="hero-title">PEDRO (MPDRAO)</h2>
+        <h2 class="hero-title">MARIO PEDRAO (MPDRAO)</h2>
         <div class="hero-subtitle">DESENVOLVEDOR FULL STACK & SISTEMAS RESILIENTES</div>
 
         <div class="comic-dialogue">
-          <p>"A chuva não cessa em Jump City. Na calada da noite, enquanto a cidade dorme sob a névoa, linhas de código em Java, C++ e TypeScript são forjadas para resistir a qualquer falha."</p>
+          <p>"A chuva não cessa do lado de fora da torre. Na calada da noite, enquanto tudo silencia sob a névoa, linhas de código em Java são forjadas para resistir a qualquer falha."</p>
           <span class="char-sign">— Registro Noturno da Torre</span>
         </div>
 
@@ -1074,11 +1082,11 @@
         <div class="monitor-specs">
           <div class="spec-line">
             <span>OPERADOR:</span>
-            <span>Pedro // mpdrao</span>
+            <span>Mario Pedrao // mpdrao</span>
           </div>
           <div class="spec-line">
             <span>BASE:</span>
-            <span>Jump City / Brasil</span>
+            <span>Brasil // Setor Remoto</span>
           </div>
           <div class="spec-line">
             <span>REPOSITÓRIOS:</span>
@@ -1086,7 +1094,7 @@
           </div>
           <div class="spec-line">
             <span>STACK FOCO:</span>
-            <span>Java • Angular • C++</span>
+            <span>Java</span>
           </div>
           <div class="spec-line">
             <span>PROTOCOLO:</span>
@@ -1309,22 +1317,22 @@
         <div class="titans-box project-card" data-category="automation">
           <div>
             <div class="project-header">
-              <span class="project-badge purple">Identidade Hacker</span>
-              <span class="repo-stats">★ Profile</span>
+              <span class="project-badge purple">Laboratório Pessoal</span>
+              <span class="repo-stats">Profile</span>
             </div>
             <h3 class="project-title">XABLAVSKK</h3>
             <p class="project-desc">
-              O quartel-general de experimentos de Pedro (@mpdrao). Um ponto de convergência para testes de ferramentas, scripts rápidos e ideias experimentais.
+              O quartel-general de experimentos de Mario Pedrao (@mpdrao). Um ponto de convergência para testes de ferramentas, scripts rápidos e ideias experimentais.
             </p>
             <div class="project-techs">
               <span class="project-tech-tag">Manifesto</span>
               <span class="project-tech-tag">Config</span>
-              <span class="project-tech-tag">Hacking Lab</span>
+              <span class="project-tech-tag">Dev Lab</span>
             </div>
           </div>
           <div class="project-footer">
             <a href="https://github.com/mpdrao/xablavskk" target="_blank" rel="noopener noreferrer" class="project-repo-link">
-              <span>github.com/mpdrao/xablavskk ↗</span>
+              <span>github.com/mpdrao/xablavskk</span>
             </a>
             <span class="repo-stats">Lab</span>
           </div>
@@ -1403,17 +1411,17 @@
             <div class="term-btn green"></div>
           </div>
           <div class="terminal-title">MAINFRAME // TORRE DOS TITÃS - TERMINAL v2.04</div>
-          <div style="font-size: 0.7rem; color: #475569;">BASH // JUMP_CITY</div>
+          <div style="font-size: 0.7rem; color: #475569;">BASH // TORRE_TITAS</div>
         </div>
 
         <div class="terminal-content" id="terminal-screen">
-          <div class="term-output-line" style="color: #64748b;">[TORRE_NET] Conexão segura estabelecida com o servidor de Jump City...</div>
+          <div class="term-output-line" style="color: #64748b;">[TORRE_NET] Conexão segura estabelecida com o servidor da Torre...</div>
           <div class="term-output-line" style="color: #38bdf8;">Bem-vindo ao terminal de @mpdrao. Digite <strong style="color: #fbbf24;">help</strong> para listar os comandos disponíveis.</div>
         </div>
 
         <div class="term-prompt-row">
           <span class="term-prompt">mpdrao@torre:~$</span>
-          <input type="text" id="terminal-input" class="term-input" placeholder="digite um comando (ex: help, projects, skills, azarath, clear)..." autocomplete="off" spellcheck="false">
+          <input type="text" id="terminal-input" class="term-input" placeholder="digite um comando (ex: help, projects, skills, titans, clear)..." autocomplete="off" spellcheck="false">
         </div>
       </div>
     </section>
@@ -1452,15 +1460,15 @@
           </div>
         </div>
 
-        <!-- Citação Melancólica de Robin / Ravena -->
+        <!-- Citação Melancólica da Torre -->
         <div class="titans-box contact-card" style="border-left: 3px solid var(--accent-raven-purple);">
           <span class="titans-corner-tag">REGISTRO FINAL</span>
-          <h3 style="color: var(--accent-raven-purple);">"AZARATH METRION ZINTHOS"</h3>
+          <h3 style="color: var(--accent-raven-purple);">DIRETIVA DA TORRE</h3>
           <p style="font-style: italic; color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
-            "A escuridão não é um vazio; é o espaço onde a concentração se aprofunda e as soluções mais difíceis tomam forma. A Torre dos Titãs resiste a cada onda porque foi construída com propósito."
+            "A noite silenciosa e a chuva constante abrem espaço para a concentração absoluta. Cada arquitetura de software é construída para ser resiliente a tempestades e falhas."
           </p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-titans-gold); margin-top: 1rem;">
-            COORDENADAS: JUMP CITY BAY • 37.8° N, 122.4° W
+            COORDENADAS: SETOR CENTRAL DA TORRE // 37.8 N, 122.4 W
           </div>
         </div>
       </div>
@@ -1468,8 +1476,8 @@
 
     <!-- FOOTER -->
     <footer>
-      <div>PORTFÓLIO PEDRO (@MPDRAO) • INSPIRADO NA ESTÉTICA CLÁSSICA DE JOVENS TITÃS (2003)</div>
-      <div>Jump City Central Network // Todos os códigos e missões hospedados no GitHub</div>
+      <div>PORTFÓLIO MARIO PEDRAO (@MPDRAO) • INSPIRADO NA ESTÉTICA CLÁSSICA DE JOVENS TITÃS (2003)</div>
+      <div>Rede Central da Torre // Todos os códigos e missões hospedados no GitHub</div>
     </footer>
 
   </div>
@@ -1480,22 +1488,30 @@
       <button class="modal-close-btn" id="close-communicator">&times;</button>
       
       <div style="width: 80px; height: 80px; margin: 0 auto 1.25rem auto;">
+        <!-- Logo Emblemático MP no modal -->
         <svg viewBox="0 0 100 100" style="filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.6));">
-          <circle cx="50" cy="50" r="46" fill="#0f1422" stroke="#38bdf8" stroke-width="5"/>
-          <circle cx="50" cy="50" r="38" fill="#182035" stroke="#1e293b" stroke-width="2"/>
-          <polygon points="26,30 74,30 74,42 56,42 56,76 44,76 44,42 26,42" fill="#fbbf24" stroke="#000" stroke-width="2.5"/>
+          <defs>
+            <linearGradient id="modalShieldGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#141c2e"/>
+              <stop offset="100%" stop-color="#080c16"/>
+            </linearGradient>
+          </defs>
+          <polygon points="50,4 94,24 94,76 50,96 6,76 6,24" fill="url(#modalShieldGrad)" stroke="#38bdf8" stroke-width="3.5"/>
+          <polygon points="50,12 86,28 86,72 50,88 14,72 14,28" fill="#060911" stroke="#1e293b" stroke-width="1.5"/>
+          <polygon points="50,20 78,34 78,66 50,80 22,66 22,34" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+          <text x="50" y="64" font-family="'Bebas Neue', sans-serif" font-size="38" font-weight="bold" text-anchor="middle" fill="#fbbf24" stroke="#000" stroke-width="1.5" letter-spacing="2">MP</text>
         </svg>
       </div>
 
       <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--accent-titans-gold); letter-spacing: 2px;">
-        COMUNICADOR DOS TITÃS
+        COMUNICADOR DA TORRE
       </h3>
       <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
         CHAMADA DE TRANSMISSÃO DIRETA // STATUS: SINAL ESTÁVEL
       </p>
 
       <div style="background: rgba(7, 9, 15, 0.95); border: 1px solid var(--border-dark); padding: 1rem; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.5;">
-        <span style="color: var(--accent-rain-cyan);">[ROBIN]:</span> "Aqui é a Torre. Relatório recebido com sucesso de Pedro (@mpdrao). Todos os 10 repositórios foram inspecionados. Os serviços em Java e C++ permanecem operacionais."
+        <span style="color: var(--accent-rain-cyan);">[COMANDO]:</span> "Aqui é a Torre. Relatório recebido com sucesso de Mario Pedrao (@mpdrao). Todos os 10 repositórios foram inspecionados. Os serviços em Java permanecem operacionais."
       </div>
 
       <a href="https://github.com/mpdrao" target="_blank" rel="noopener noreferrer" class="btn-titans btn-titans-primary" style="width: 100%; justify-content: center;">
@@ -1596,7 +1612,7 @@
       noiseNode.buffer = noiseBuffer;
       noiseNode.loop = true;
 
-      // Filtro passa-baixa simulando a acústica de chuva de Jump City
+      // Filtro passa-baixa simulando a acústica de chuva noturna
       filterNode = audioCtx.createBiquadFilter();
       filterNode.type = 'lowpass';
       filterNode.frequency.setValueAtTime(800, audioCtx.currentTime);
@@ -1660,14 +1676,13 @@
     const terminalScreen = document.getElementById('terminal-screen');
 
     const commands = {
-      'help': 'Comandos disponíveis: help, projects, skills, about, contact, azarath, titans, clear, date',
-      'about': 'Pedro (@mpdrao) - Desenvolvedor Full Stack especializado em Java (Spring Boot), Angular, C++, TypeScript e soluções em nuvem.',
+      'help': 'Comandos disponíveis: help, projects, skills, about, contact, titans, clear, date',
+      'about': 'Mario Pedrao (@mpdrao) - Desenvolvedor Full Stack especializado em Java (Spring Boot) e sistemas resilientes.',
       'projects': 'Repositórios principais: cotai, software-engineering-agent, PRINTAI-DEV, shops-api, foodbase, react-next, rans-dio.',
       'skills': 'Arsenal: Java 21, Spring Boot, Angular, React, Next.js, C++, Python, PostgreSQL, PowerShell, Docker, Git.',
-      'contact': 'GitHub: https://github.com/mpdrao | Local: Jump City Central Network',
-      'azarath': 'Azarath Metrion Zinthos... Os corvos de Ravena guardam o portal.',
+      'contact': 'GitHub: https://github.com/mpdrao | Base: Torre dos Titas',
       'titans': 'TITAS, ATACAR! Frequencia do comunicado sintonizada.',
-      'date': new Date().toLocaleString('pt-BR') + ' // Noite chuvosa em Jump City',
+      'date': new Date().toLocaleString('pt-BR') + ' // Noite chuvosa na Torre',
       'clear': 'CLEAR_COMMAND'
     };
 
