@@ -40,6 +40,9 @@
 
     html {
       scroll-behavior: smooth;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -47,6 +50,8 @@
       color: var(--text-main);
       font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
       overflow-x: hidden;
       line-height: 1.5;
       position: relative;
@@ -251,12 +256,14 @@
       gap: 2rem;
       margin-bottom: 3.5rem;
       align-items: stretch;
+      width: 100%;
     }
 
     .hero-main {
       padding: 2.2rem;
       position: relative;
       background: linear-gradient(135deg, rgba(14, 18, 29, 0.95) 0%, rgba(19, 25, 41, 0.85) 100%);
+      min-width: 0;
     }
 
     .eyebrow {
@@ -278,21 +285,24 @@
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.8rem;
-      line-height: 0.95;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1;
       letter-spacing: 2px;
       color: #fff;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
       text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .hero-subtitle {
-      font-size: 1.35rem;
+      font-size: clamp(1rem, 3vw, 1.35rem);
       font-weight: 600;
       color: var(--accent-rain-cyan);
       letter-spacing: 1px;
       margin-bottom: 1.25rem;
+      line-height: 1.3;
     }
 
     .comic-dialogue {
@@ -540,9 +550,10 @@
     /* GRID DE PROJETOS / MISSÕES */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
       gap: 1.75rem;
       margin-bottom: 4rem;
+      width: 100%;
     }
 
     .project-card {
@@ -662,9 +673,10 @@
     /* ARSENAL TÁTICO / HABILIDADES */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
       gap: 1.5rem;
       margin-bottom: 4rem;
+      width: 100%;
     }
 
     .skill-card {
@@ -933,19 +945,159 @@
       color: #fff;
     }
 
-    /* RESPONSIVIDADE */
-    @media (max-width: 860px) {
+    /* RESPONSIVIDADE COMPLETA PARA TABLETS E SMARTPHONES */
+    @media (max-width: 900px) {
       .hero-section {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
       }
       .contact-grid {
         grid-template-columns: 1fr;
-      }
-      .hero-title {
-        font-size: 2.8rem;
+        gap: 1.5rem;
       }
       .projects-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        margin-bottom: 2rem;
+      }
+      .brand {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.6rem;
+      }
+      .brand-meta h1 {
+        font-size: 1.45rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .system-status {
+        justify-content: center;
+      }
+      .nav-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .btn-audio {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.72rem;
+      }
+      .nav-link {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        background: rgba(19, 25, 41, 0.4);
+        border: 1px solid var(--border-dark);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .app-wrapper {
+        padding: 0 0.85rem 3rem 0.85rem;
+      }
+      .titans-box {
+        clip-path: polygon(
+          10px 0%, 
+          calc(100% - 10px) 0%, 
+          100% 10px, 
+          100% calc(100% - 10px), 
+          calc(100% - 10px) 100%, 
+          10px 100%, 
+          0% calc(100% - 10px), 
+          0% 10px
+        );
+      }
+      .hero-main {
+        padding: 1.5rem 1rem;
+      }
+      .hero-side-card {
+        padding: 1.25rem 1rem;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+        line-height: 1.05;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .hero-actions .btn-titans {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.15rem;
+        padding: 0.6rem 1rem;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .section-title {
+        font-size: 1.85rem;
+        flex-wrap: wrap;
+      }
+      .filter-tabs {
+        gap: 0.4rem;
+      }
+      .filter-btn {
+        flex: 1 1 calc(50% - 0.4rem);
+        text-align: center;
+        padding: 0.45rem 0.4rem;
+        font-size: 0.72rem;
+      }
+      .project-card {
+        padding: 1.25rem 1rem;
+      }
+      .project-title {
+        font-size: 1.6rem;
+      }
+      .project-desc {
+        font-size: 0.9rem;
+      }
+      .skill-card {
+        padding: 1.25rem 1rem;
+      }
+      .contact-card {
+        padding: 1.35rem 1rem;
+      }
+      .contact-link-row {
+        font-size: 0.78rem;
+        padding: 0.65rem 0.75rem;
+        word-break: break-all;
+      }
+      .terminal-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .terminal-content {
+        font-size: 0.78rem;
+        padding: 1rem 0.85rem;
+      }
+      .term-prompt-row {
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        padding: 0 0.85rem 0.85rem 0.85rem;
+      }
+      .term-input {
+        width: 100%;
+        min-width: 100px;
+        font-size: 0.78rem;
+      }
+      .communicator-modal {
+        width: 95%;
+        max-width: 360px;
+        padding: 1.5rem 1rem;
       }
     }
   </style>
@@ -987,12 +1139,12 @@
       </a>
 
       <div class="nav-controls">
-        <button id="toggle-audio-btn" class="btn-audio" title="Ativar/Desativar som ambiente de chuva e estática">
+        <button id="toggle-audio-btn" class="btn-audio active" title="Ativar/Desativar chuva e som ambiente">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
           </svg>
-          <span id="audio-label">CHUVA: OFF</span>
+          <span id="audio-label">CHUVA: ON</span>
         </button>
         <a href="#projetos" class="nav-link">/MISSÕES</a>
         <a href="#arsenal" class="nav-link">/ARSENAL</a>
@@ -1522,18 +1674,21 @@
 
   <!-- SCRIPTS: CHUVA EM CANVAS, ÁUDIO AMBIENTE SINTETIZADO E TERMINAL INTERATIVO -->
   <script>
-    // 1. ANIMAÇÃO DE CHUVA MELANCÓLICA NO CANVAS
+    // 1. SISTEMA INTEGRADO DE CHUVA (CANVAS + AUDIO SINTETIZADO)
     const canvas = document.getElementById('rain-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
+
+    let isRainActive = true;
+    let rainAnimationId = null;
 
     window.addEventListener('resize', () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     });
 
-    const dropCount = 140;
+    const dropCount = 130;
     const drops = [];
 
     for (let i = 0; i < dropCount; i++) {
@@ -1547,6 +1702,8 @@
     }
 
     function animateRain() {
+      if (!isRainActive) return;
+
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < dropCount; i++) {
@@ -1559,7 +1716,7 @@
         ctx.stroke();
 
         d.y += d.speed;
-        d.x -= 0.6; // ligeiro vento melancólico
+        d.x -= 0.6; // vento suave
 
         if (d.y > height) {
           d.y = -20;
@@ -1570,14 +1727,14 @@
         }
       }
 
-      requestAnimationFrame(animateRain);
+      rainAnimationId = requestAnimationFrame(animateRain);
     }
-    animateRain();
 
-    // 2. SINTETIZADOR DE ÁUDIO MELANCÓLICO DE CHUVA (Web Audio API)
-    // Sem arquivos externos: gera ruído rosa filtrado simulando chuva suave contínua
+    // Inicia a chuva visual imediatamente
+    rainAnimationId = requestAnimationFrame(animateRain);
+
+    // 2. SINTETIZADOR DE AUDIO PROCEDURAL (WEB AUDIO API)
     let audioCtx = null;
-    let isPlayingAudio = false;
     let noiseNode = null;
     let filterNode = null;
     let gainNode = null;
@@ -1593,7 +1750,6 @@
       const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
 
-      // Algoritmo de ruído rosa suave para simulação natural de chuva
       let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
       for (let i = 0; i < bufferSize; i++) {
         const white = Math.random() * 2 - 1;
@@ -1604,7 +1760,7 @@
         b4 = 0.55000 * b4 + white * 0.5329522;
         b5 = -0.7616 * b5 - white * 0.0168980;
         output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-        output[i] *= 0.04; // volume moderado e calmo
+        output[i] *= 0.04;
         b6 = white * 0.115926;
       }
 
@@ -1612,7 +1768,6 @@
       noiseNode.buffer = noiseBuffer;
       noiseNode.loop = true;
 
-      // Filtro passa-baixa simulando a acústica de chuva noturna
       filterNode = audioCtx.createBiquadFilter();
       filterNode.type = 'lowpass';
       filterNode.frequency.setValueAtTime(800, audioCtx.currentTime);
@@ -1627,22 +1782,40 @@
       noiseNode.start();
     }
 
+    // CONTROLE UNIFICADO DE LIGAR/DESLIGAR CHUVA
     toggleAudioBtn.addEventListener('click', () => {
-      if (!audioCtx) {
-        createRainAudio();
-        isPlayingAudio = true;
-        toggleAudioBtn.classList.add('active');
-        audioLabel.textContent = 'CHUVA: ON';
-      } else if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-        isPlayingAudio = true;
-        toggleAudioBtn.classList.add('active');
-        audioLabel.textContent = 'CHUVA: ON';
-      } else if (audioCtx.state === 'running') {
-        audioCtx.suspend();
-        isPlayingAudio = false;
+      if (isRainActive) {
+        // Desligar chuva visual
+        isRainActive = false;
+        if (rainAnimationId) {
+          cancelAnimationFrame(rainAnimationId);
+          rainAnimationId = null;
+        }
+        ctx.clearRect(0, 0, width, height);
+        canvas.style.display = 'none';
+
+        // Desligar audio se ativo
+        if (audioCtx && audioCtx.state === 'running') {
+          try { audioCtx.suspend(); } catch (e) {}
+        }
+
         toggleAudioBtn.classList.remove('active');
         audioLabel.textContent = 'CHUVA: OFF';
+      } else {
+        // Ligar chuva visual
+        isRainActive = true;
+        canvas.style.display = 'block';
+        rainAnimationId = requestAnimationFrame(animateRain);
+
+        // Ligar ou resumir audio
+        if (!audioCtx) {
+          try { createRainAudio(); } catch (e) {}
+        } else if (audioCtx.state === 'suspended') {
+          try { audioCtx.resume(); } catch (e) {}
+        }
+
+        toggleAudioBtn.classList.add('active');
+        audioLabel.textContent = 'CHUVA: ON';
       }
     });
 
